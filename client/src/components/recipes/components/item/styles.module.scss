@@ -1,0 +1,9 @@
+  .h5 {
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    max-width: 300px;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
