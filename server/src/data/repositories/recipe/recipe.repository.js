@@ -22,6 +22,7 @@ class Recipe extends Abstract {
         'description'
       )
       .leftJoin('recipe_contents', 'recipe_contents.recipe_id', 'recipes.id')
+      .orderBy('recipe_contents.updated_at', 'desc')
       .where('recipes.id', id)
       .first();
   }

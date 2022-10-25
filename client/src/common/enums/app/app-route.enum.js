@@ -1,5 +1,6 @@
 const AppRoute = {
   ROOT: '/',
+  RECIPE: '/:id',
   ANY: '*'
 };
 

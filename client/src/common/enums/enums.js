@@ -11,6 +11,5 @@ export {
   ButtonType,
   IconColor,
   IconName,
-  IconSize,
-  ImageSize
+  IconSize
 } from './components/components.js';

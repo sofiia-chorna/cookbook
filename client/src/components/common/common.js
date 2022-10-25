@@ -8,3 +8,5 @@ export { Button } from './button/button.jsx';
 export { Spinner } from './spinner/spinner.jsx';
 export { PublicRoute } from './public-route/public-route.jsx';
 export { FormField } from './form-field/form-field.jsx';
+export { IconButton } from './icon-button/icon-button.jsx';
+export { RecipeModal } from './recipe-modal/recipe-modal.jsx';

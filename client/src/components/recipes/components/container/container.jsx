@@ -5,7 +5,7 @@ import { CreateButton, Item } from '../components.js';
 import styles from './styles.module.scss';
 
 export const Container = ({ recipes, onItemClick, onCreate }) => (
-  <div className={getAllowedClasses(styles.workspacesContainer, 'py-2 w-100')}>
+  <div className={getAllowedClasses(styles.recipeContainer, 'py-2 w-100')}>
     <CreateButton onClick={onCreate} />
     {recipes.map(recipe => <Item key={recipe.id} recipe={recipe} onClick={onItemClick} />)}
   </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { recipeErrorType } from 'common/prop-types/prop-types.js';
+import { recipeErrorType, recipeType } from 'common/prop-types/prop-types.js';
 import { Button, Modal } from 'react-bootstrap';
 import { FormField } from '../form-field/form-field.jsx';
 
@@ -10,7 +10,8 @@ export const InputModal = ({
   confirmButton,
   cancelButton,
   register,
-  errors
+  errors,
+  recipe
 }) => {
   return (
     <Modal
@@ -34,6 +35,7 @@ export const InputModal = ({
           controlId="inputModalTitle"
           register={register('name')}
           errors={errors.name}
+          value={recipe.name}
         />
         <FormField
           as="textarea"
@@ -44,6 +46,7 @@ export const InputModal = ({
           register={register('description')}
           errors={errors.description}
           rows={5}
+          value={recipe.description}
         />
       </Modal.Body>
       <Modal.Footer>
@@ -77,11 +80,13 @@ InputModal.propTypes = {
   register: PropTypes.func.isRequired,
   confirmButton: PropTypes.element,
   cancelButton: PropTypes.element,
-  errors: recipeErrorType
+  errors: recipeErrorType,
+  recipe: recipeType
 };
 
 InputModal.defaultProps = {
   errors: {},
   confirmButton: React.createElement('div'),
-  cancelButton: React.createElement('div')
+  cancelButton: React.createElement('div'),
+  recipe: {}
 };

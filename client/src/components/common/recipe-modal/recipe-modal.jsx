@@ -6,14 +6,17 @@ import {
   useAppForm,
   useSelector
 } from 'hooks/hooks';
+import { recipeType } from 'common/prop-types/prop-types.js';
 import { recipe as recipeSchema } from 'validation-schemas/validation-schemas.js';
 import { InputModal } from 'components/common/common';
-import { DEFAULT_RECIPE_PAYLOAD } from '../../common/constants.js';
+import { DEFAULT_RECIPE_PAYLOAD } from '../../recipes/common/constants.js';
 
-export const CreateRecipeModal = ({
+export const RecipeModal = ({
+  title,
   showModal,
   onModalClose,
-  handleFunction
+  handleFunction,
+  recipe
 }) => {
   const { creatingError } = useSelector(state => state.recipes);
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
@@ -46,7 +49,7 @@ export const CreateRecipeModal = ({
   return (
     <InputModal
       showModal={showModal}
-      title="Create a recipe:"
+      title={title}
       controlId="createRecipe"
       confirmButton={{
         text: 'Save',
@@ -60,12 +63,20 @@ export const CreateRecipeModal = ({
       }}
       errors={errors}
       register={register}
+      recipe={recipe}
     />
   );
 };
 
-CreateRecipeModal.propTypes = {
+RecipeModal.propTypes = {
+  title: PropTypes.string,
   showModal: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
-  handleFunction: PropTypes.func.isRequired
+  handleFunction: PropTypes.func.isRequired,
+  recipe: recipeType
+};
+
+RecipeModal.defaultProps = {
+  title: '',
+  recipe: {}
 };

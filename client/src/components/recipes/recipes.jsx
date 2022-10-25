@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useState, useDispatch, useSelector } from 'hooks/hooks.js';
+import { useCallback, useEffect, useState, useDispatch, useSelector, useNavigate } from 'hooks/hooks.js';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 import { recipeActionCreator } from 'store/actions.js';
-import { Spinner } from 'components/common/common.js';
-import { Container, CreateRecipeModal, ExpandedRecipe } from './components/components.js';
+import { replaceIdParam } from 'helpers/helpers.js';
+import { Spinner, RecipeModal } from 'components/common/common.js';
+import { AppRoute } from 'common/enums/enums.js';
+import { Container } from './components/components.js';
 
 const recipesFilter = {
   from: 0,
@@ -11,12 +13,15 @@ const recipesFilter = {
 
 const Recipes = () => {
   const dispatch = useDispatch();
-  const { recipes, expandedRecipe } = useSelector(state => ({
+  const navigate = useNavigate();
+
+  const { recipes, currentRecipe } = useSelector(state => ({
     recipes: state.recipes.recipes,
-    expandedRecipe: state.recipes.expandedRecipe
+    currentRecipe: state.recipes.currentRecipe
   }));
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isRecipeSelected, setIsRecipeSelected] = useState(false);
 
   const handleCreationCancel = () => {
     setIsModalVisible(false);
@@ -31,6 +36,13 @@ const Recipes = () => {
     );
   };
 
+  useEffect(() => {
+    if (isRecipeSelected && currentRecipe) {
+      handleCreationCancel();
+      navigate(replaceIdParam(AppRoute.RECIPE, currentRecipe.id));
+    }
+  }, [currentRecipe, isRecipeSelected]);
+
   const handleRecipesLoad = useCallback(filtersPayload => {
     dispatch(recipeActionCreator.loadRecipes(filtersPayload));
   }, [dispatch]);
@@ -39,10 +51,13 @@ const Recipes = () => {
     recipesFilter.from = 0;
     handleRecipesLoad(recipesFilter);
     recipesFilter.from = recipesFilter.count; // for the next scroll
-  }, []);
+  }, [handleRecipesLoad]);
 
   const handleItemClick = useCallback(
-    id => dispatch(recipeActionCreator.toggleExpandedRecipe(id)),
+    id => {
+      dispatch(recipeActionCreator.loadRecipe(id));
+      setIsRecipeSelected(true);
+    },
     [dispatch]
   );
 
@@ -61,13 +76,13 @@ const Recipes = () => {
         ) : (
           <Spinner height="12rem" width="12rem" />
         )}
-        <CreateRecipeModal
+        <RecipeModal
+          title="Create a recipe"
           showModal={isModalVisible}
           onModalClose={handleCreationCancel}
           handleFunction={handleCreationConfirm}
         />
       </BootstrapContainer>
-      {expandedRecipe && <ExpandedRecipe />}
     </div>
   );
 };

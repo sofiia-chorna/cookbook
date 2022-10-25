@@ -3,12 +3,12 @@ import {
   loadRecipes,
   createRecipe,
   updateRecipe,
-  toggleExpandedRecipe
+  loadRecipe
 } from './actions.js';
 
 const initialState = {
   recipes: [],
-  expandedRecipe: null
+  currentRecipe: null
 };
 
 const reducer = createReducer(initialState, builder => {
@@ -24,9 +24,9 @@ const reducer = createReducer(initialState, builder => {
     const { recipe } = action.payload;
     state.recipes = [recipe, ...state.recipes];
   });
-  builder.addCase(toggleExpandedRecipe.fulfilled, (state, action) => {
+  builder.addCase(loadRecipe.fulfilled, (state, action) => {
     const { recipe } = action.payload;
-    state.expandedRecipe = recipe;
+    state.currentRecipe = recipe;
   });
 });
 

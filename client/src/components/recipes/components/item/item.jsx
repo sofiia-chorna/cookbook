@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
+import { Button, Card } from 'react-bootstrap';
 import { recipeType } from 'common/prop-types/prop-types';
 import { getAllowedClasses } from 'helpers/helpers';
-import { Button, Card } from 'react-bootstrap';
 import styles from './styles.module.scss';
 
 export const Item = ({ recipe, onClick }) => (
