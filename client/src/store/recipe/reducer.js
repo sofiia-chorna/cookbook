@@ -1,4 +1,4 @@
-import { createReducer, isAnyOf } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import {
   loadRecipes,
   createRecipe
@@ -13,16 +13,11 @@ const reducer = createReducer(initialState, builder => {
   builder.addCase(loadRecipes.fulfilled, (state, action) => {
     const { recipes } = action.payload;
     state.recipes = recipes;
-    state.hasMorePosts = Boolean(recipes.length);
   });
-  builder.addMatcher(
-    isAnyOf(createRecipe.fulfilled),
-    (state, action) => {
-      const { recipe } = action.payload;
-      console.log(recipe);
-      state.recipes = [recipe, ...state.recipes];
-    }
-  );
+  builder.addCase(createRecipe.fulfilled, (state, action) => {
+    const { recipe } = action.payload;
+    state.recipes = [recipe, ...state.recipes];
+  });
 });
 
 export { reducer };

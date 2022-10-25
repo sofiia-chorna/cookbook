@@ -1,6 +1,7 @@
 class Recipe {
-  constructor({ recipeRepository }) {
+  constructor({ recipeRepository, recipeContentRepository }) {
     this._recipeRepository = recipeRepository;
+    this._recipeContentRepository = recipeContentRepository;
   }
 
   getRecipes(filter) {
@@ -11,10 +12,13 @@ class Recipe {
     return this._recipeRepository.getRecipeById(id);
   }
 
-  createRecipe(recipe) {
-    return this._recipeRepository.createRecipe({
-      ...recipe
+  async createRecipe(recipe) {
+    const { id } = await this._recipeRepository.createRecipe({});
+    this._recipeContentRepository.createRecipeContent({
+      ...recipe,
+      recipeId: id
     });
+    return this.getRecipeById(id);
   }
 }
 
