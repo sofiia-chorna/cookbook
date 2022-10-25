@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, useDispatch, useSelector } from 'hook
 import { Container as BootstrapContainer } from 'react-bootstrap';
 import { recipeActionCreator } from 'store/actions.js';
 import { Spinner } from 'components/common/common.js';
-import { Container, CreateRecipeModal } from './components/components.js';
+import { Container, CreateRecipeModal, ExpandedRecipe } from './components/components.js';
 
 const recipesFilter = {
   from: 0,
@@ -11,8 +11,9 @@ const recipesFilter = {
 
 const Recipes = () => {
   const dispatch = useDispatch();
-  const { recipes } = useSelector(state => ({
-    recipes: state.recipes.recipes
+  const { recipes, expandedRecipe } = useSelector(state => ({
+    recipes: state.recipes.recipes,
+    expandedRecipe: state.recipes.expandedRecipe
   }));
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,7 +29,6 @@ const Recipes = () => {
         description: data.description
       })
     );
-    // setIsRecipeSelected(true);
   };
 
   const handleRecipesLoad = useCallback(filtersPayload => {
@@ -41,7 +41,11 @@ const Recipes = () => {
     recipesFilter.from = recipesFilter.count; // for the next scroll
   }, []);
 
-  const handleItemClick = () => console.log('handleItemClick');
+  const handleItemClick = useCallback(
+    id => dispatch(recipeActionCreator.toggleExpandedRecipe(id)),
+    [dispatch]
+  );
+
   const handleCreate = () => setIsModalVisible(true);
 
   return (
@@ -63,6 +67,7 @@ const Recipes = () => {
           handleFunction={handleCreationConfirm}
         />
       </BootstrapContainer>
+      {expandedRecipe && <ExpandedRecipe />}
     </div>
   );
 };

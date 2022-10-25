@@ -1,7 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   loadRecipes,
-  createRecipe
+  createRecipe,
+  updateRecipe,
+  toggleExpandedRecipe
 } from './actions.js';
 
 const initialState = {
@@ -17,6 +19,14 @@ const reducer = createReducer(initialState, builder => {
   builder.addCase(createRecipe.fulfilled, (state, action) => {
     const { recipe } = action.payload;
     state.recipes = [recipe, ...state.recipes];
+  });
+  builder.addCase(updateRecipe.fulfilled, (state, action) => {
+    const { recipe } = action.payload;
+    state.recipes = [recipe, ...state.recipes];
+  });
+  builder.addCase(toggleExpandedRecipe.fulfilled, (state, action) => {
+    const { recipe } = action.payload;
+    state.expandedRecipe = recipe;
   });
 });
 

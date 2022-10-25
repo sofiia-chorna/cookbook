@@ -14,7 +14,15 @@ class Recipe {
 
   async createRecipe(recipe) {
     const { id } = await this._recipeRepository.createRecipe({});
-    this._recipeContentRepository.createRecipeContent({
+    await this._recipeContentRepository.createRecipeContent({
+      ...recipe,
+      recipeId: id
+    });
+    return this.getRecipeById(id);
+  }
+
+  async updateRecipe(id, recipe) {
+    await this._recipeContentRepository.createRecipeContent({
       ...recipe,
       recipeId: id
     });

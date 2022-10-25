@@ -4,8 +4,6 @@ import { getAllowedClasses } from 'helpers/helpers';
 import { Button, Card } from 'react-bootstrap';
 import styles from './styles.module.scss';
 
-// {/*<Card.Title className="text-break">{recipe.name}</Card.Title>*/}
-
 export const Item = ({ recipe, onClick }) => (
   <Card className="rounded border-0 p-0">
     <Button

@@ -18,7 +18,26 @@ const createRecipe = createAsyncThunk(
   }
 );
 
+const updateRecipe = createAsyncThunk(
+  ActionType.UPDATE_RECIPE,
+  async (recipe, { extra: { services } }) => {
+    const { id } = await services.recipe.updateRecipe(recipe);
+    const updatedRecipe = await services.recipe.getRecipe(id);
+    return { recipe: updatedRecipe };
+  }
+);
+
+const toggleExpandedRecipe = createAsyncThunk(
+  ActionType.SET_EXPANDED_RECIPE,
+  async (recipeId, { extra: { services } }) => {
+    const recipe = recipeId ? await services.recipe.getRecipe(recipeId) : undefined;
+    return { recipe };
+  }
+);
+
 export {
   loadRecipes,
-  createRecipe
+  createRecipe,
+  updateRecipe,
+  toggleExpandedRecipe
 };

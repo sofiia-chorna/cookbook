@@ -7,3 +7,4 @@ export { Portal } from './portal/portal.jsx';
 export { Button } from './button/button.jsx';
 export { Spinner } from './spinner/spinner.jsx';
 export { PublicRoute } from './public-route/public-route.jsx';
+export { FormField } from './form-field/form-field.jsx';

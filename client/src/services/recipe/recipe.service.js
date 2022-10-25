@@ -19,17 +19,22 @@ class Recipe {
   }
 
   getRecipe(id) {
-    return this._http.load(
-      `${this._apiPath}${ApiPath.RECIPES}${RecipesApiPath.ROOT}${id}`,
-      {
-        method: HttpMethod.GET
-      }
-    );
+    return this._http.load(`${this._apiPath}${ApiPath.RECIPES}${RecipesApiPath.ROOT}${id}`, {
+      method: HttpMethod.GET
+    });
   }
 
   createRecipe(payload) {
     return this._http.load(`${this._apiPath}${ApiPath.RECIPES}`, {
       method: HttpMethod.POST,
+      contentType: ContentType.JSON,
+      payload: JSON.stringify(payload)
+    });
+  }
+
+  updateRecipe(id, payload) {
+    return this._http.load(`${this._apiPath}${ApiPath.RECIPES}${RecipesApiPath.ROOT}${id}`, {
+      method: HttpMethod.PUT,
       contentType: ContentType.JSON,
       payload: JSON.stringify(payload)
     });

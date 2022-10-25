@@ -18,7 +18,7 @@ export const FormField = ({
   <Form.Group className="mb-3" controlId={controlId}>
     <Form.Label className={getAllowedClasses(styles.label)}>{label}</Form.Label>
     {value ? (
-      <Form.Control readOnly placeholder={value} />
+      <Form.Control readOnly as={as} rows={rows} placeholder={value} />
     ) : (
       <Form.Control
         {...register}
@@ -43,7 +43,7 @@ export const FormField = ({
 
 FormField.propTypes = {
   label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   helper: PropTypes.string,
   register: PropTypes.func,
   errors: PropTypes.arrayOf(PropTypes.string),
@@ -55,10 +55,11 @@ FormField.propTypes = {
 
 FormField.defaultProps = {
   as: 'input',
+  placeholder: '',
   rows: 1,
   helper: '',
+  controlId: '',
   register: null,
   errors: null,
-  controlId: '',
   value: null
 };

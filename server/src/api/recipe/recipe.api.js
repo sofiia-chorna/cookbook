@@ -24,6 +24,13 @@ const initRecipe = (fastify, opts, done) => {
       return await recipeService.createRecipe(req.body);
     }
   });
+  fastify.route({
+    method: HttpMethod.PUT,
+    url: RecipesApiPath.$ID,
+    [ControllerHook.HANDLER]: async req => {
+      return await recipeService.updateRecipe(req.params.id, req.body);
+    }
+  });
 
   done();
 };
