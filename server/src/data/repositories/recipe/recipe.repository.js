@@ -1,4 +1,5 @@
 import { Abstract } from '../abstract/abstract.repository.js';
+import { RecipeContent } from '../../models/models.js';
 
 class Recipe extends Abstract {
   constructor({ recipeModel }) {
@@ -12,13 +13,32 @@ class Recipe extends Abstract {
   }
 
   getRecipeById(id) {
+    // select * from recipes
+    // left join recipe_contents content
+    // on content.recipe_id = recipes.id
+    // where recipes.id = '00840bfe-5304-41f9-9fc4-f8f441aba141'
+
     return this.model
       .query()
       .select(
-        'recipes.*'
+        'recipes.created_at',
+        'recipes.updated_at',
+        'recipes.id',
+        'recipe_contents.name',
+        'recipe_contents.description'
       )
-      .where({ id })
+      .leftJoin('recipe_contents', 'recipe_contents.recipe_id', 'recipes.id')
+      .where('recipes.id', id)
       .first();
+  }
+
+  async createRecipe(recipe) {
+    const newRecipe = await this.create({});
+    RecipeContent.query().insert({
+      ...recipe,
+      recipeId: newRecipe.id,
+    });
+    return newRecipe;
   }
 }
 

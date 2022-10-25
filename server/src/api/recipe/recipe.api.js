@@ -13,13 +13,15 @@ const initRecipe = (fastify, opts, done) => {
   fastify.route({
     method: HttpMethod.GET,
     url: RecipesApiPath.$ID,
-    [ControllerHook.HANDLER]: req => recipeService.getRecipeById(req.params.id)
+    [ControllerHook.HANDLER]: async req => {
+      return await recipeService.getRecipeById(req.params.id);
+    }
   });
   fastify.route({
     method: HttpMethod.POST,
     url: RecipesApiPath.ROOT,
     [ControllerHook.HANDLER]: async req => {
-      return await recipeService.create(req.user.id, req.body);
+      return await recipeService.createRecipe(req.body);
     }
   });
 

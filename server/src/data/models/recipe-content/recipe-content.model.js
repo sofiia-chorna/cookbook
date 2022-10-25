@@ -19,7 +19,7 @@ class RecipeContent extends AbstractModel {
         ...baseSchema.properties,
         name: { type: 'string' },
         description: { type: 'string' },
-        recipeId: { type: ['uuid', 'null'] },
+        recipeId: { type: ['string', 'null'] },
       }
     };
   }

@@ -1,3 +1,4 @@
+import { generateUUID } from '../../../helpers/helpers.js';
 import { Model } from 'objection';
 
 class Abstract extends Model {
@@ -14,6 +15,7 @@ class Abstract extends Model {
 
   $beforeInsert() {
     const date = new Date().toISOString();
+    this.id = generateUUID();
     this.created_at = date;
     this.updated_at = date;
   }

@@ -1,1 +1,1 @@
-export { getErrorStatusCode } from './http/http.js';
+export { generateUUID } from './uuid/uuid.js';
