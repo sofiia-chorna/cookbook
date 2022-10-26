@@ -35,9 +35,27 @@ const loadRecipe = createAsyncThunk(
   }
 );
 
+const loadVersions = createAsyncThunk(
+  ActionType.SET_RECIPE_VERSIONS,
+  async (recipeId, { extra: { services } }) => {
+    const recipes = recipeId ? await services.recipe.getRecipeVersions(recipeId) : undefined;
+    return { recipes };
+  }
+);
+
+const loadVersion = createAsyncThunk(
+  ActionType.SET_RECIPE_VERSION,
+  async (recipeId, versionId, { extra: { services } }) => {
+    const recipe = recipeId ? await services.recipe.getRecipeVersion(recipeId, versionId) : undefined;
+    return { recipe };
+  }
+);
+
 export {
   loadRecipes,
   loadRecipe,
   createRecipe,
-  updateRecipe
+  updateRecipe,
+  loadVersions,
+  loadVersion
 };

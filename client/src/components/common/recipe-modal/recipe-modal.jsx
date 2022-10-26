@@ -9,7 +9,6 @@ import {
 import { recipeType } from 'common/prop-types/prop-types.js';
 import { recipe as recipeSchema } from 'validation-schemas/validation-schemas.js';
 import { InputModal } from 'components/common/common';
-import { DEFAULT_RECIPE_PAYLOAD } from '../../recipes/common/constants.js';
 
 export const RecipeModal = ({
   title,
@@ -20,6 +19,7 @@ export const RecipeModal = ({
 }) => {
   const { creatingError } = useSelector(state => state.recipes);
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
+  const defaultValues = { name: recipe.name, description: recipe.description };
 
   useEffect(() => {
     if (creatingError !== '') {
@@ -28,13 +28,13 @@ export const RecipeModal = ({
   }, [creatingError]);
 
   const { errors, reset, register, handleSubmit } = useAppForm({
-    defaultValues: DEFAULT_RECIPE_PAYLOAD,
-    validationSchema: recipeSchema
+    validationSchema: recipeSchema,
+    defaultValues
   });
 
   const handleClose = () => {
     onModalClose();
-    reset(DEFAULT_RECIPE_PAYLOAD);
+    reset(defaultValues);
   };
 
   const handleSubmitForm = async data => {
@@ -43,7 +43,7 @@ export const RecipeModal = ({
     onModalClose();
 
     setSubmitDisabled(false);
-    reset(DEFAULT_RECIPE_PAYLOAD);
+    reset(data);
   };
 
   return (

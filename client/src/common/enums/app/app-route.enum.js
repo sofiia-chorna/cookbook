@@ -1,7 +1,8 @@
 const AppRoute = {
   ROOT: '/',
   RECIPE: '/:id',
-  ANY: '*'
+  ANY: '*',
+  RECIPE_PREVIOUS_VERSION: '/:id/version/:versionId'
 };
 
 export { AppRoute };

@@ -8,6 +8,12 @@ class RecipeContent extends Abstract {
   async createRecipeContent(payload) {
     return await this.create(payload);
   }
+
+  getContentByRecipeId(id) {
+    return this.model.query()
+      .select('recipe_contents.*')
+      .where('recipe_id', id);
+  }
 }
 
 export { RecipeContent };

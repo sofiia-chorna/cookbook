@@ -18,6 +18,20 @@ const initRecipe = (fastify, opts, done) => {
     }
   });
   fastify.route({
+    method: HttpMethod.GET,
+    url: RecipesApiPath.$ID_VERSIONS,
+    [ControllerHook.HANDLER]: async req => {
+      return await recipeService.getRecipeVersions(req.params.id);
+    }
+  });
+  fastify.route({
+    method: HttpMethod.GET,
+    url: RecipesApiPath.$ID_$VERSION,
+    [ControllerHook.HANDLER]: async req => {
+      return await recipeService.getRecipeVersion(req.params.id, req.params.versionId);
+    }
+  });
+  fastify.route({
     method: HttpMethod.POST,
     url: RecipesApiPath.ROOT,
     [ControllerHook.HANDLER]: async req => {

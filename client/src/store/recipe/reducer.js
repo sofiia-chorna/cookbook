@@ -3,12 +3,15 @@ import {
   loadRecipes,
   createRecipe,
   updateRecipe,
-  loadRecipe
+  loadRecipe,
+  loadVersions,
+  loadVersion
 } from './actions.js';
 
 const initialState = {
   recipes: [],
-  currentRecipe: null
+  currentRecipe: null,
+  versions: []
 };
 
 const reducer = createReducer(initialState, builder => {
@@ -22,9 +25,20 @@ const reducer = createReducer(initialState, builder => {
   });
   builder.addCase(updateRecipe.fulfilled, (state, action) => {
     const { recipe } = action.payload;
-    state.recipes = [recipe, ...state.recipes];
+    state.currentRecipe = recipe;
+    state.recipes = state.recipes.map(oldRecipe => {
+      return oldRecipe.id === recipe.id ? recipe : oldRecipe;
+    });
   });
   builder.addCase(loadRecipe.fulfilled, (state, action) => {
+    const { recipe } = action.payload;
+    state.currentRecipe = recipe;
+  });
+  builder.addCase(loadVersions.fulfilled, (state, action) => {
+    const { recipes } = action.payload;
+    state.versions = recipes;
+  });
+  builder.addCase(loadVersion.fulfilled, (state, action) => {
     const { recipe } = action.payload;
     state.currentRecipe = recipe;
   });
