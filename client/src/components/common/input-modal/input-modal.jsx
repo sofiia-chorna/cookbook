@@ -17,8 +17,8 @@ export const InputModal = ({
 }) => {
   return (
     <Modal
-      className="d-flex align-items-center"
-      dialogClassName="w-25 rounded"
+      className={getAllowedClasses(styles.modal, 'd-flex align-items-center')}
+      dialogClassName={getAllowedClasses(styles.content, 'rounded')}
       show={showModal}
       onHide={cancelButton?.onClick}
       backdrop="static"

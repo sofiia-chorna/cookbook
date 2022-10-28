@@ -21,9 +21,9 @@ const VersionDropdown = ({ versions, onChange }) => {
     <Dropdown as={NavLink} align="end" className={getAllowedClasses(styles.container, 'd-inline-flex sm')}>
       <Dropdown.Toggle
         as={NavLink}
-        className={getAllowedClasses('sm text-secondary')}
+        className="sm text-secondary"
       >
-        <span className="h2 me-2">
+        <span className={getAllowedClasses(styles.dropDownTitle, 'h2 me-2')}>
           Version:
           {' '}
           {versionButtonValue}
@@ -38,7 +38,6 @@ const VersionDropdown = ({ versions, onChange }) => {
                 versionId={versionId}
                 key={version.id}
                 recipeId={id}
-                latest={version.createdAt === latestVersion?.createdAt}
                 onClick={() => onChange(version)}
               >
                 {version.createdAt === latestVersion?.createdAt ? (

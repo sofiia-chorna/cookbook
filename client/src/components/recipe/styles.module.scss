@@ -59,3 +59,37 @@
 .success:hover {
   background-color: #036666 !important;
 }
+
+@media only screen and (min-width: 500px) {
+  .success,
+  .secondary {
+    width: 60px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .success,
+  .secondary {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .success,
+  .secondary {
+    width: 100px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .success,
+  .secondary {
+    width: 120px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .content {
+    width: 130px;
+  }
+}
