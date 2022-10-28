@@ -30,7 +30,7 @@ const updateRecipe = createAsyncThunk(
 const loadRecipe = createAsyncThunk(
   ActionType.SET_CURRENT_RECIPE,
   async (recipeId, { extra: { services } }) => {
-    const recipe = recipeId ? await services.recipe.getRecipe(recipeId) : undefined;
+    const recipe = recipeId ? await services.recipe.getRecipe(recipeId) : null;
     return { recipe };
   }
 );
@@ -38,7 +38,7 @@ const loadRecipe = createAsyncThunk(
 const loadVersions = createAsyncThunk(
   ActionType.SET_RECIPE_VERSIONS,
   async (recipeId, { extra: { services } }) => {
-    const recipes = recipeId ? await services.recipe.getRecipeVersions(recipeId) : undefined;
+    const recipes = recipeId ? await services.recipe.getRecipeVersions(recipeId) : null;
     return { recipes };
   }
 );
@@ -46,8 +46,7 @@ const loadVersions = createAsyncThunk(
 const loadVersion = createAsyncThunk(
   ActionType.SET_RECIPE_VERSION,
   async ({ recipeId, versionId }, { extra: { services } }) => {
-    console.log('here');
-    const recipe = recipeId ? await services.recipe.getRecipeVersion(recipeId, versionId) : undefined;
+    const recipe = recipeId ? await services.recipe.getRecipeVersion(recipeId, versionId) : null;
     return { recipe };
   }
 );

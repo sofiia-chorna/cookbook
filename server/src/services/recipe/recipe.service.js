@@ -33,10 +33,10 @@ class Recipe {
     return await this._recipeContentRepository.getContentByRecipeId(id);
   }
 
-  getRecipeVersion(id, versionId) {
-    const recipe = this._recipeRepository.getById(id);
-    const content = this._recipeContentRepository.getById(versionId);
-    return { ...content, ...recipe };
+  async getRecipeVersion(id, versionId) {
+    const recipe = await this._recipeRepository.getById(id);
+    const content = await this._recipeContentRepository.getById(versionId);
+    return content ? { ...recipe, name: content.name, description: content.description } : recipe;
   }
 }
 

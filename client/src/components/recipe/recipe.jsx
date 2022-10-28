@@ -18,23 +18,37 @@ const Recipe = () => {
   }));
 
   const sortedVersions = [...versions].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  const [currentVersion, setCurrentVersion] = React.useState(sortedVersions[0]);
+  const [currentVersion, setCurrentVersion] = React.useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
+    setCurrentVersion(sortedVersions[0]);
+  }, [versions]);
+
+  const updateURL = (recipe, version) => {
+    if (recipe && version) {
+      const url = replaceRecipeIdParamAndVersionId(AppRoute.RECIPE_VERSION, recipe.id, version.id);
+      navigate(url);
+    }
+  };
+
+  useEffect(() => {
+    if (currentRecipe) {
+      dispatch(
+        recipeActionCreator.loadVersions(currentRecipe.id)
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (!currentRecipe) {
       navigate(AppRoute.ROOT);
-    } else {
-      dispatch(
-        recipeActionCreator.loadVersions(currentRecipe.id)
-      );
     }
   }, [currentRecipe]);
 
   useEffect(() => {
     if (currentRecipe && currentVersion) {
-      const url = replaceRecipeIdParamAndVersionId(AppRoute.RECIPE_VERSION, currentRecipe.id, currentVersion.id);
-      navigate(url);
+      updateURL(currentRecipe, currentVersion);
     }
   }, [currentVersion]);
 
@@ -47,7 +61,12 @@ const Recipe = () => {
   };
 
   const handleVersionChange = version => {
-    setCurrentVersion(version);
+    if (version.id !== currentVersion.id) {
+      setCurrentVersion(version);
+      dispatch(
+        recipeActionCreator.loadVersion({ recipeId: currentRecipe.id, versionId: version.id })
+      );
+    }
   };
 
   const handleUpdateConfirm = data => {
@@ -93,9 +112,7 @@ const Recipe = () => {
               </div>
               <VersionDropdown
                 versions={sortedVersions}
-                currentVersion={currentVersion}
                 onChange={handleVersionChange}
-                recipeId={currentRecipe.id}
               />
             </div>
             <div className={getAllowedClasses(styles.outerDiv, 'mt-5 h-100 border')}>

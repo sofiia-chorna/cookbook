@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
+import { useParams } from 'hooks/hooks.js';
 import * as React from 'react';
 import NavLink from 'react-bootstrap/NavLink';
 import { recipeType } from 'common/prop-types/prop-types.js';
@@ -8,13 +9,13 @@ import { VersionItem } from '../version-item/version-item.jsx';
 import { BlueCircle } from '../version-item/blue-circle/blue-circle.jsx';
 import styles from './styles.module.scss';
 
-const VersionDropdown = ({ versions, onChange, currentVersion, recipeId }) => {
+const VersionDropdown = ({ versions, onChange }) => {
   const latestVersion = versions[0];
-  const versionButtonValue = !currentVersion || false
+  const { id, versionId } = useParams();
+  const currentVersion = versions.find(version => version.id === versionId);
+  const versionButtonValue = latestVersion?.id === currentVersion?.id
     ? 'Latest'
-    : getFormattedVersionDate(
-      versions ? currentVersion?.createdAt : new Date().toString()
-    );
+    : getFormattedVersionDate(currentVersion?.createdAt);
 
   return (
     <Dropdown as={NavLink} align="end" className={getAllowedClasses(styles.container, 'd-inline-flex sm')}>
@@ -34,16 +35,16 @@ const VersionDropdown = ({ versions, onChange, currentVersion, recipeId }) => {
             <div className="d-flex" key={version.id}>
               <VersionItem
                 id={version.id}
-                versionId={currentVersion.id}
+                versionId={versionId}
                 key={version.id}
-                recipeId={recipeId}
+                recipeId={id}
                 latest={version.createdAt === latestVersion?.createdAt}
                 onClick={() => onChange(version)}
               >
                 {version.createdAt === latestVersion?.createdAt ? (
                   <div className="d-flex justify-content-between">
                     {' '}
-                    {currentVersion.id === version.id || !currentVersion ? (
+                    {versionId === version.id || !versionId ? (
                       <BlueCircle />
                     ) : null}
                     <div className={getAllowedClasses(styles.dropDownItem, 'pt-2')}>
@@ -54,7 +55,7 @@ const VersionDropdown = ({ versions, onChange, currentVersion, recipeId }) => {
                   </div>
                 ) : (
                   <div className="d-flex">
-                    {currentVersion.id === version.id ? <BlueCircle /> : null}
+                    {versionId === version.id ? <BlueCircle /> : null}
                     <div className={getAllowedClasses(styles.dropDownItem, 'pt-2')}>
                       {getFormattedVersionDate(version.createdAt)}
                     </div>
@@ -73,16 +74,12 @@ const VersionDropdown = ({ versions, onChange, currentVersion, recipeId }) => {
 
 VersionDropdown.propTypes = {
   versions: PropTypes.arrayOf(recipeType),
-  onChange: PropTypes.func,
-  currentVersion: recipeType,
-  recipeId: PropTypes.string
+  onChange: PropTypes.func
 };
 
 VersionDropdown.defaultProps = {
   versions: null,
-  currentVersion: null,
-  onChange: undefined,
-  recipeId: null
+  onChange: undefined
 };
 
 export { VersionDropdown };

@@ -14,6 +14,7 @@ export const VersionItem = ({
   recipeId,
   latest
 }) => {
+  return (
     <Dropdown.Item
       id={id}
       as={Link}

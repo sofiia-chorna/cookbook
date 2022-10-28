@@ -1,4 +1,7 @@
 const getFormattedVersionDate = createdAt => {
+  if (!createdAt) {
+    return '';
+  }
   const formattedDate = new Date(createdAt);
   const year = formattedDate.getFullYear();
   const day = formattedDate.getDate().toString().padStart(2, '0');
