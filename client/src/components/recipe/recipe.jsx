@@ -29,15 +29,12 @@ const Recipe = () => {
         recipeActionCreator.loadVersions(currentRecipe.id)
       );
     }
-  }, []);
+  }, [currentRecipe]);
 
   useEffect(() => {
     if (currentRecipe && currentVersion) {
       const url = replaceRecipeIdParamAndVersionId(AppRoute.RECIPE_VERSION, currentRecipe.id, currentVersion.id);
       navigate(url);
-      // dispatch(
-      //   recipeActionCreator.loadVersion({ recipeId: currentRecipe.id, versionId: currentVersion.id })
-      // );
     }
   }, [currentVersion]);
 

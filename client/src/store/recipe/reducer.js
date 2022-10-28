@@ -34,13 +34,15 @@ const reducer = createReducer(initialState, builder => {
     const { recipe } = action.payload;
     state.currentRecipe = recipe;
   });
+  builder.addCase(loadRecipe.pending, state => {
+    state.currentRecipe = null;
+  });
   builder.addCase(loadVersions.fulfilled, (state, action) => {
     const { recipes } = action.payload;
     state.versions = recipes;
   });
   builder.addCase(loadVersion.fulfilled, (state, action) => {
     const { recipe } = action.payload;
-    console.log(recipe);
     state.currentRecipe = recipe;
   });
 });

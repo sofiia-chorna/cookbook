@@ -13,25 +13,26 @@ export const VersionItem = ({
   versionId,
   recipeId,
   latest
-}) => (
-  <Dropdown.Item
-    id={id}
-    as={Link}
-    to={
-      latest
-        ? (replaceIdParam(AppRoute.RECIPE, recipeId || ''))
-        : (replaceRecipeIdParamAndVersionId(
-          AppRoute.RECIPE_VERSION,
-          recipeId || '',
-          versionId || ''
-        ))
-    }
-    className={getAllowedClasses(styles.versionItem, 'text-secondary')}
-    onClick={onClick}
-  >
-    {children}
-  </Dropdown.Item>
-);
+}) => {
+    <Dropdown.Item
+      id={id}
+      as={Link}
+      to={
+        latest
+          ? (replaceIdParam(AppRoute.RECIPE, recipeId || ''))
+          : (replaceRecipeIdParamAndVersionId(
+            AppRoute.RECIPE_VERSION,
+            recipeId || '',
+            versionId || ''
+          ))
+      }
+      className={getAllowedClasses(styles.versionItem, 'text-secondary')}
+      onClick={onClick}
+    >
+      {children}
+    </Dropdown.Item>
+  );
+};
 
 VersionItem.propTypes = {
   id: PropTypes.string.isRequired,
