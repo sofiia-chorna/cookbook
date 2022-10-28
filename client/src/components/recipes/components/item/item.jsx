@@ -8,7 +8,7 @@ export const Item = ({ recipe, onClick }) => (
   <Card className="rounded border-0 p-0">
     <Button
       variant="light"
-      className="bg-white h-100"
+      className={getAllowedClasses(styles.button, 'h-100')}
       onClick={() => onClick(recipe.id)}
     >
       <Card.Body className="d-flex align-items-center justify-content-center">

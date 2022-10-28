@@ -4,7 +4,7 @@ import {
   HttpMethod,
   ContentType
 } from 'common/enums/enums';
-import { replaceIdParam } from 'helpers/helpers.js';
+import { replaceIdParam, replaceRecipeIdParamAndVersionId } from 'helpers/helpers.js';
 
 class Recipe {
   constructor({ apiPath, http }) {
@@ -49,8 +49,8 @@ class Recipe {
   }
 
   getRecipeVersion(id, versionId) {
-    const recipeIdPath = replaceIdParam(RecipesApiPath.$ID, id);
-    return this._http.load(`${this._apiPath}${ApiPath.RECIPES}${recipeIdPath}${RecipesApiPath.ROOT}${versionId}`, {
+    const recipeIdPath = replaceRecipeIdParamAndVersionId(RecipesApiPath.$ID_$VERSION, id, versionId);
+    return this._http.load(`${this._apiPath}${ApiPath.RECIPES}${recipeIdPath}`, {
       method: HttpMethod.GET
     });
   }

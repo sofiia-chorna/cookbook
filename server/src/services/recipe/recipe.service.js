@@ -30,11 +30,7 @@ class Recipe {
   }
 
   async getRecipeVersions(id) {
-    const recipe = await this._recipeRepository.getById(id);
-    const contents = await this._recipeContentRepository.getContentByRecipeId(id);
-    return contents.map(content => {
-      return { ...content, ...recipe };
-    });
+    return await this._recipeContentRepository.getContentByRecipeId(id);
   }
 
   getRecipeVersion(id, versionId) {

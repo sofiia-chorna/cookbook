@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 import { useController } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import clsx from 'clsx';
-
 import { IconName } from 'common/enums/enums.js';
 import { Icon } from 'components/common/common.js';
-
 import styles from './styles.module.scss';
 
 const Input = ({
@@ -60,7 +58,7 @@ Input.propTypes = {
   iconName: PropTypes.oneOf(Object.values(IconName)),
   placeholder: PropTypes.string.isRequired,
   className: PropTypes.string,
-  type: PropTypes.oneOf(['email', 'password', 'submit', 'text']),
+  type: PropTypes.oneOf(['submit', 'text']),
   rows: PropTypes.number
 };
 

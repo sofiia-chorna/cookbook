@@ -1,14 +1,12 @@
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo } from 'hooks/hooks';
-
 import styles from './styles.module.scss';
 
 const Portal = ({ children }) => {
   const portalContainer = useMemo(() => {
     const el = document.createElement('div');
     el.classList.add(styles.portal);
-
     return el;
   }, []);
 

@@ -1,73 +1,70 @@
+import PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
-import { VersionItem } from '../version-item/version-item';
-import { BlueCircle } from '../version-item/blue-circle/blue-circle.jsx';
-import { useAppSelector, useParams } from 'hooks/hooks';
+import * as React from 'react';
 import NavLink from 'react-bootstrap/NavLink';
-import {
-  getAllowedClasses,
-  getFormattedVersionDate,
-} from 'helpers/helpers';
-import styles from './styles.module.scss';
 import { recipeType } from 'common/prop-types/prop-types.js';
+import { getAllowedClasses, getFormattedVersionDate } from 'helpers/helpers';
+import { VersionItem } from '../version-item/version-item.jsx';
+import { BlueCircle } from '../version-item/blue-circle/blue-circle.jsx';
+import styles from './styles.module.scss';
 
-const VersionDropdown = ({ currContent }) => {
-  const pageId = useParams().id;
+const VersionDropdown = ({ versions, onChange, currentVersion, recipeId }) => {
+  const latestVersion = versions[0];
+  const versionButtonValue = !currentVersion || false
+    ? 'Latest'
+    : getFormattedVersionDate(
+      versions ? currentVersion?.createdAt : new Date().toString()
+    );
 
-  const pageContents = useAppSelector(
-    (state) => state.pages.currentPage?.pageContents,
-  );
-  const { currentPage } = useAppSelector((state) => state.pages);
-
-  const currVersionId = useParams().versionId;
-
-  const latestVersion = currentPage?.pageContents[0];
-
-  const pageContentsCopy = JSON.parse(JSON.stringify(pageContents),);
-
-  const versionButtonValue =
-    !currVersionId || currentPage?.pageContents[0]?.id === currVersionId
-      ? 'Latest'
-      : getFormattedVersionDate(
-          currContent ? currContent?.createdAt : new Date().toString(),
-        );
   return (
-    <Dropdown as={NavLink} align="end" className="d-inline-flex sm">
+    <Dropdown as={NavLink} align="end" className={getAllowedClasses(styles.container, 'd-inline-flex sm')}>
       <Dropdown.Toggle
         as={NavLink}
         className={getAllowedClasses('sm text-secondary')}
       >
-        <span className="me-2">Version: {versionButtonValue}</span>
+        <span className="h2 me-2">
+          Version:
+          {' '}
+          {versionButtonValue}
+        </span>
       </Dropdown.Toggle>
       <Dropdown.Menu className={getAllowedClasses(styles.dropDownMenu)}>
-        {pageContentsCopy ? (
-          pageContentsCopy.map(({ id, createdAt }) => (
-            <div className="d-flex" key={id}>
+        {versions && currentVersion ? (
+          versions.map(version => (
+            <div className="d-flex" key={version.id}>
               <VersionItem
-                id={id}
-                versionId={id}
-                key={id}
-                pageId={pageId}
-                latest={createdAt === latestVersion?.createdAt}
+                id={version.id}
+                versionId={currentVersion.id}
+                key={version.id}
+                recipeId={recipeId}
+                latest={version.createdAt === latestVersion?.createdAt}
+                onClick={() => onChange(version)}
               >
-                {createdAt === latestVersion?.createdAt ? (
-                  <div className="d-flex">
+                {version.createdAt === latestVersion?.createdAt ? (
+                  <div className="d-flex justify-content-between">
                     {' '}
-                    {currVersionId === id || !currVersionId ? (
+                    {currentVersion.id === version.id || !currentVersion ? (
                       <BlueCircle />
                     ) : null}
-                    {getFormattedVersionDate(createdAt)} (Latest)
+                    <div className={getAllowedClasses(styles.dropDownItem, 'pt-2')}>
+                      {getFormattedVersionDate(version.createdAt)}
+                      {' '}
+                      (Latest)
+                    </div>
                   </div>
                 ) : (
                   <div className="d-flex">
-                    {currVersionId === id ? <BlueCircle /> : null}
-                    {getFormattedVersionDate(createdAt)}
+                    {currentVersion.id === version.id ? <BlueCircle /> : null}
+                    <div className={getAllowedClasses(styles.dropDownItem, 'pt-2')}>
+                      {getFormattedVersionDate(version.createdAt)}
+                    </div>
                   </div>
                 )}
               </VersionItem>
             </div>
           ))
         ) : (
-          <p className="fs-6"> no versions </p>
+          <p className="h3"> no versions </p>
         )}
       </Dropdown.Menu>
     </Dropdown>
@@ -75,11 +72,17 @@ const VersionDropdown = ({ currContent }) => {
 };
 
 VersionDropdown.propTypes = {
-  currContent: recipeType
+  versions: PropTypes.arrayOf(recipeType),
+  onChange: PropTypes.func,
+  currentVersion: recipeType,
+  recipeId: PropTypes.string
 };
 
 VersionDropdown.defaultProps = {
-  currContent: null
+  versions: null,
+  currentVersion: null,
+  onChange: undefined,
+  recipeId: null
 };
 
 export { VersionDropdown };

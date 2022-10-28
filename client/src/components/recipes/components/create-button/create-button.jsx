@@ -4,12 +4,12 @@ import { getAllowedClasses } from 'helpers/helpers';
 import styles from './styles.module.scss';
 
 export const CreateButton = ({ onClick }) => (
-  <Card className="rounded bg-white border-0 p-0">
+  <Card className={getAllowedClasses(styles.button, 'rounded border-0 p-0')}>
     <Button
       variant="light"
       className={getAllowedClasses(
         styles.createButton,
-        'bg-white d-flex align-items-center justify-content-center h-100'
+        'd-flex align-items-center justify-content-center h-100'
       )}
       onClick={onClick}
     >

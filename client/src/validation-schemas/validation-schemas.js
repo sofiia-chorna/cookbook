@@ -1,3 +1,1 @@
-export {
-  recipe
-} from 'shared/src/validation-schemas/validation-schemas.js';
+export { recipe } from 'shared/src/validation-schemas/validation-schemas.js';

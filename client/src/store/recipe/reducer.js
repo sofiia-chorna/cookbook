@@ -40,6 +40,7 @@ const reducer = createReducer(initialState, builder => {
   });
   builder.addCase(loadVersion.fulfilled, (state, action) => {
     const { recipe } = action.payload;
+    console.log(recipe);
     state.currentRecipe = recipe;
   });
 });

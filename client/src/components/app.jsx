@@ -10,6 +10,7 @@ const App = () => {
     <div className="fill">
       <main className="fill">
         <Routes>
+          <Route path={AppRoute.RECIPE_VERSION} element={<PublicRoute component={Recipe} />} />
           <Route path={AppRoute.RECIPE} element={<PublicRoute component={Recipe} />} />
           <Route path={AppRoute.ROOT} element={<PublicRoute component={Recipes} />} />
           <Route path={AppRoute.ANY} element={<NotFound />} />

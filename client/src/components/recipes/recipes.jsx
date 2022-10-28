@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState, useDispatch, useSelector, useNavigate } from 'hooks/hooks.js';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 import { recipeActionCreator } from 'store/actions.js';
-import { replaceIdParam } from 'helpers/helpers.js';
+import { getAllowedClasses, replaceIdParam } from 'helpers/helpers.js';
 import { Spinner, RecipeModal } from 'components/common/common.js';
 import { AppRoute } from 'common/enums/enums.js';
 import { Container } from './components/components.js';
+import styles from './styles.module.scss';
 
 const recipesFilter = {
   from: 0,
@@ -64,9 +65,9 @@ const Recipes = () => {
   const handleCreate = () => setIsModalVisible(true);
 
   return (
-    <div className="bg-light position-relative d-flex flex-column align-items-center pt-5 vh-100">
-      <BootstrapContainer className="position-relative d-flex flex-column align-items-center pt-5 vh-100">
-        <h1 className="h3 mb-5">Select the recipe</h1>
+    <div className={getAllowedClasses(styles.container, 'd-flex flex-column align-items-center pt-1')}>
+      <BootstrapContainer className="position-relative d-flex flex-column align-items-center pt-5">
+        <h1 className={getAllowedClasses(styles.title, 'mb-5')}>Select the recipe</h1>
         {recipes ? (
           <Container
             recipes={recipes}

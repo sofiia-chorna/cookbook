@@ -9,7 +9,7 @@ export const FormField = ({ label, placeholder, helper, register, errors, contro
   const [currentValue, setCurrentValue] = useState(value);
   return (
     <Form.Group className="mb-3" controlId={controlId}>
-      <Form.Label className={getAllowedClasses(styles.label)}>{label}</Form.Label>
+      <Form.Label>{label}</Form.Label>
       <Form.Control
         {...register}
         as={as}

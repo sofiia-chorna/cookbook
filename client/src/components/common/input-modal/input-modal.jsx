@@ -1,8 +1,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { getAllowedClasses } from 'helpers/helpers';
 import { recipeErrorType, recipeType } from 'common/prop-types/prop-types.js';
 import { Button, Modal } from 'react-bootstrap';
 import { FormField } from '../form-field/form-field.jsx';
+import styles from './styles.module.scss';
 
 export const InputModal = ({
   title,
@@ -24,7 +26,7 @@ export const InputModal = ({
       onSubmit={confirmButton?.onClick}
     >
       <Modal.Header closeButton>
-        <Modal.Title className="fs-6">{title}</Modal.Title>
+        <Modal.Title className={getAllowedClasses(styles.title)}>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="mx-0">
         <FormField

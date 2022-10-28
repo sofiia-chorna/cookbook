@@ -45,7 +45,8 @@ const loadVersions = createAsyncThunk(
 
 const loadVersion = createAsyncThunk(
   ActionType.SET_RECIPE_VERSION,
-  async (recipeId, versionId, { extra: { services } }) => {
+  async ({ recipeId, versionId }, { extra: { services } }) => {
+    console.log('here');
     const recipe = recipeId ? await services.recipe.getRecipeVersion(recipeId, versionId) : undefined;
     return { recipe };
   }

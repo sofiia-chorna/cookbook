@@ -1,3 +1,25 @@
+.rootContainer {
+  padding-top: 80px;
+  position: relative;
+}
+
+.mainContainer {
+  position: relative;
+  height: 90%;
+  background-color: #f8f9fa;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 34px;
+}
+
 .half-rule {
   margin-left: 0;
   text-align: left;
@@ -6,10 +28,10 @@
 
 .outer-div {
   display: flex;
-  height: 170px;
-  width: 300px;
+  width: 95%;
   background-color: lightgray;
-  justify-content: center;
+  overflow: hidden;
+  height: available;
 }
 
 .description {
@@ -17,18 +39,23 @@
   display: block;
   position: relative;
   margin: 0 auto;
-  top: 50%;
+  top: 35%;
   line-height: 2em;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-height: 80%;
   -webkit-box-orient: vertical;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
-.button {
+.success,
+.secondary {
   width: 140px;
   height: 40px;
+  font-size: 20px;
+}
+
+.success:hover {
+  background-color: #036666 !important;
 }
