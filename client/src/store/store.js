@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { http, storage, recipe } from 'services/services.js';
+import { http, recipe } from 'services/services.js';
 import { recipeReducer } from './root-reducer.js';
 
 const store = configureStore({
@@ -11,7 +11,6 @@ const store = configureStore({
       extraArgument: {
         services: {
           http,
-          storage,
           recipe
         }
       }

@@ -1,5 +1,4 @@
 import { Model } from 'objection';
-
 import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
 import { RecipeContent as RecipeContentModel } from '../recipe-content/recipe-content.model.js';

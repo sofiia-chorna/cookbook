@@ -7,8 +7,8 @@ class Abstract extends Model {
       type: 'object',
       properties: {
         id: { type: 'string' },
-        created_at: { type: 'string' },
-        updated_at: { type: 'string' }
+        createdAt: { type: 'string' },
+        updatedAt: { type: 'string' }
       }
     };
   }
@@ -16,12 +16,12 @@ class Abstract extends Model {
   $beforeInsert() {
     const date = new Date().toISOString();
     this.id = generateUUID();
-    this.created_at = date;
-    this.updated_at = date;
+    this.createdAt = date;
+    this.updatedAt = date;
   }
 
   $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
+    this.updatedAt = new Date().toISOString();
   }
 }
 

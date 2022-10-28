@@ -1,22 +1,16 @@
 import { HttpError } from 'exceptions/exceptions';
 import { getStringifiedQuery } from 'helpers/helpers';
-import { StorageKey, HttpHeader, HttpMethod } from 'common/enums/enums';
+import { HttpHeader, HttpMethod } from 'common/enums/enums';
 
 class Http {
-  constructor({ storage }) {
-    this._storage = storage;
-  }
-
   load(url, options = {}) {
     const {
       method = HttpMethod.GET,
       payload = null,
-      hasAuth = true,
       contentType,
       query
     } = options;
     const headers = this._getHeaders({
-      hasAuth,
       contentType
     });
 
@@ -30,19 +24,11 @@ class Http {
       .catch(this._throwError);
   }
 
-  _getHeaders({ hasAuth, contentType }) {
+  _getHeaders({ contentType }) {
     const headers = new Headers();
-
     if (contentType) {
       headers.append(HttpHeader.CONTENT_TYPE, contentType);
     }
-
-    if (hasAuth) {
-      const token = this._storage.getItem(StorageKey.TOKEN);
-
-      headers.append(HttpHeader.AUTHORIZATION, `Bearer ${token}`);
-    }
-
     return headers;
   }
 
