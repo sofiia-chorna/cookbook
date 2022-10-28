@@ -7,11 +7,6 @@ import { AppRoute } from 'common/enums/enums.js';
 import { Container } from './components/components.js';
 import styles from './styles.module.scss';
 
-const recipesFilter = {
-  from: 0,
-  count: 10
-};
-
 const Recipes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,14 +39,12 @@ const Recipes = () => {
     }
   }, [currentRecipe, isRecipeSelected]);
 
-  const handleRecipesLoad = useCallback(filtersPayload => {
-    dispatch(recipeActionCreator.loadRecipes(filtersPayload));
+  const handleRecipesLoad = useCallback(() => {
+    dispatch(recipeActionCreator.loadRecipes());
   }, [dispatch]);
 
   useEffect(() => {
-    recipesFilter.from = 0;
-    handleRecipesLoad(recipesFilter);
-    recipesFilter.from = recipesFilter.count; // for the next scroll
+    handleRecipesLoad();
   }, [handleRecipesLoad]);
 
   const handleItemClick = useCallback(

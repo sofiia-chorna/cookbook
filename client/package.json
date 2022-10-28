@@ -25,14 +25,12 @@
     "react-bootstrap": "2.5.0",
     "react-dom": "17.0.2",
     "react-hook-form": "7.31.1",
-    "react-infinite-scroll-component": "6.1.0",
     "react-notifications": "1.7.3",
     "react-redux": "8.0.1",
     "react-router-dom": "6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "9.0.8",
-    "shared": "file:../shared",
-    "socket.io-client": "4.5.0"
+    "shared": "file:../shared"
   },
   "browserslist": [
     ">0.2%",
