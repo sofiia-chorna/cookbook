@@ -4,6 +4,7 @@ import { useEffect, useState, useAppForm, useSelector } from 'hooks/hooks';
 import { recipeType } from 'common/prop-types/prop-types.js';
 import { recipe as recipeSchema } from 'validation-schemas/validation-schemas.js';
 import { InputModal } from 'components/common/common';
+import { DEFAULT_RECIPE_PAYLOAD } from '../constants/constants.js';
 
 export const RecipeModal = ({
   title,
@@ -29,7 +30,7 @@ export const RecipeModal = ({
 
   const handleClose = () => {
     onModalClose();
-    reset(defaultValues);
+    reset(DEFAULT_RECIPE_PAYLOAD);
   };
 
   const handleSubmitForm = async data => {
@@ -38,7 +39,7 @@ export const RecipeModal = ({
     onModalClose();
 
     setSubmitDisabled(false);
-    reset(data);
+    reset(DEFAULT_RECIPE_PAYLOAD);
   };
 
   return (
