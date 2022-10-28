@@ -86,6 +86,8 @@ const Recipe = () => {
     navigate(AppRoute.ROOT);
   };
 
+  const isLatestVersion = currentVersion && currentVersion.id === sortedVersions[0].id;
+
   return currentRecipe && (
     <div className={getAllowedClasses(styles.rootContainer, 'align-items-center vh-100')}>
       <BootstrapContainer className={getAllowedClasses(styles.mainContainer, 'rounded text-center')}>
@@ -105,6 +107,7 @@ const Recipe = () => {
                 <Button
                   variant="success"
                   onClick={handleEdit}
+                  disabled={!isLatestVersion}
                   className={getAllowedClasses(styles.success, 'me-2')}
                 >
                   Edit

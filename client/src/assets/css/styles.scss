@@ -65,6 +65,11 @@ h6 {
   font-size: 20px;
 }
 
+.btn-success:disabled {
+  background-color: #6c757d;
+  border: #6c757d;
+}
+
 .btn-check:focus,
 .btn-success:focus {
   box-shadow: none;
@@ -72,7 +77,7 @@ h6 {
 }
 
 .btn-success:hover {
-  background-color: #036666 !important;
+  background-color: #136640 !important;
 }
 
 .dropdown-item:active {
