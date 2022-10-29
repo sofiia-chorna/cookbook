@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { recipeType } from 'common/prop-types/prop-types';
 import { getAllowedClasses } from 'helpers/helpers';
-import { CreateButton, Item } from '../components.js';
+import { CreateButton } from '../create-button/create-button.jsx';
+import { Item } from '../item/item.jsx';
 import styles from './styles.module.scss';
 
 export const Container = ({ recipes, onItemClick, onCreate }) => (
