@@ -37,7 +37,7 @@ export const InputModal = ({
           controlId="inputModalTitle"
           register={register('name')}
           errors={errors.name}
-          value={recipe.name}
+          value={recipe?.name}
         />
         <FormField
           as="textarea"
@@ -48,7 +48,7 @@ export const InputModal = ({
           register={register('description')}
           errors={errors.description}
           rows={5}
-          value={recipe.description}
+          value={recipe?.description}
         />
       </Modal.Body>
       <Modal.Footer>

@@ -14,7 +14,9 @@ export const RecipeModal = ({
 }) => {
   const { creatingError } = useSelector(state => state.recipes);
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
-  const defaultValues = { name: recipe.name, description: recipe.description };
+  const defaultValues = recipe
+    ? { name: recipe.name, description: recipe.description }
+    : { name: '', description: '' };
 
   useEffect(() => {
     if (creatingError !== '') {
@@ -27,18 +29,25 @@ export const RecipeModal = ({
     defaultValues
   });
 
+  const handleReset = () => {
+    if (recipe) { // Update modal
+      reset({ name: recipe.name, description: recipe.description });
+    } else { // Create modal
+      reset({ name: '', description: '' });
+    }
+  };
+
   const handleClose = () => {
     onModalClose();
-    reset(defaultValues);
+    handleReset();
   };
 
   const handleSubmitForm = async data => {
     setSubmitDisabled(true);
     handleFunction(data);
     onModalClose();
-
     setSubmitDisabled(false);
-    reset(data);
+    handleReset();
   };
 
   return (
@@ -73,5 +82,5 @@ RecipeModal.propTypes = {
 
 RecipeModal.defaultProps = {
   title: '',
-  recipe: {}
+  recipe: null
 };

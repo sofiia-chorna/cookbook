@@ -26,27 +26,28 @@
   width: 50%;
 }
 
-.outer-div {
+.content {
   display: flex;
-  width: 95%;
   background-color: lightgray;
-  overflow: hidden;
-  height: available;
+  height: calc(100% - 205px);
+  flex: 1;
+  overflow: auto;
 }
 
 .description {
-  width: 95%;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
   position: relative;
   margin: 0 auto;
-  top: 35%;
   line-height: 2em;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  height: 100%;
+  vertical-align: middle;
+  min-height: min-content;
 }
 
 .success,

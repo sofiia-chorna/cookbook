@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
-import { Dropdown } from 'react-bootstrap';
-import { useParams } from 'hooks/hooks.js';
 import * as React from 'react';
-import NavLink from 'react-bootstrap/NavLink';
+import PropTypes from 'prop-types';
 import { recipeType } from 'common/prop-types/prop-types.js';
+import { Dropdown, NavLink } from 'react-bootstrap';
+import { useParams } from 'hooks/hooks.js';
 import { getAllowedClasses, getFormattedVersionDate } from 'helpers/helpers';
 import { VersionItem } from '../version-item/version-item.jsx';
 import { BlueCircle } from '../version-item/blue-circle/blue-circle.jsx';
@@ -18,12 +17,12 @@ const VersionDropdown = ({ versions, onChange }) => {
     : getFormattedVersionDate(currentVersion?.createdAt);
 
   return (
-    <Dropdown as={NavLink} align="end" className={getAllowedClasses(styles.container, 'd-inline-flex sm')}>
+    <Dropdown as={NavLink} align="end" className="d-inline-flex sm">
       <Dropdown.Toggle
         as={NavLink}
-        className="sm text-secondary"
+        className={getAllowedClasses(styles.dropDownTitle, 'sm text-secondary')}
       >
-        <span className={getAllowedClasses(styles.dropDownTitle, 'h2 me-2')}>
+        <span className="h2 me-2">
           Version:
           {' '}
           {versionButtonValue}

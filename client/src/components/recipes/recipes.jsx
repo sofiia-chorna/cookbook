@@ -55,10 +55,12 @@ const Recipes = () => {
     [dispatch]
   );
 
-  const handleCreate = () => setIsModalVisible(true);
+  const handleCreate = () => {
+    setIsModalVisible(true);
+  };
 
   return (
-    <div className={getAllowedClasses(styles.container, 'd-flex flex-column align-items-center pt-1')}>
+    <div className="d-flex flex-column align-items-center pt-1">
       <BootstrapContainer className="position-relative d-flex flex-column align-items-center pt-5">
         <h1 className={getAllowedClasses(styles.title, 'mb-5')}>Select the recipe</h1>
         {recipes ? (

@@ -118,7 +118,7 @@ const Recipe = () => {
                 onChange={handleVersionChange}
               />
             </div>
-            <div className={getAllowedClasses(styles.outerDiv, 'mt-5 h-100 border')}>
+            <div className={getAllowedClasses(styles.content, 'mt-5 p-5 border')}>
               <h2 className={getAllowedClasses(styles.description)}>{currentRecipe.description}</h2>
             </div>
           </div>
