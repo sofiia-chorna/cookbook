@@ -4,7 +4,6 @@ config();
 
 const {
   APP_PORT,
-  SOCKET_PORT,
   DB_NAME,
   DB_USERNAME,
   DB_PASSWORD,
@@ -16,8 +15,7 @@ const {
 const ENV = {
   APP: {
     API_PATH: '/api',
-    PORT: APP_PORT,
-    SOCKET_PORT
+    PORT: APP_PORT
   },
   DB: {
     DATABASE: DB_NAME,

@@ -32,6 +32,7 @@ class Recipe extends Abstract {
   }
 
   async createRecipe() {
+    // empty as all fields are auto-generated
     return await this.create({});
   }
 }
