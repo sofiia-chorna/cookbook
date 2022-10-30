@@ -47,7 +47,7 @@ export const InputModal = ({
           controlId="inputModalDescription"
           register={register('description')}
           errors={errors.description}
-          rows={5}
+          rows={8}
           value={recipe?.description}
         />
       </Modal.Body>
